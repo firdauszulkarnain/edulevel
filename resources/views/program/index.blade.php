@@ -52,7 +52,6 @@
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Program</th>
                                         <th scope="col">Edulevel</th>
-                                        <th scope="col">Info</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -61,9 +60,10 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $program->name }}</td>
-                                            <td>{{ $program->edulevel_id }}</td>
-                                            <td>{{ $program->info }}</td>
+                                            <td>{{ $program->edulevel->name }}</td>
                                             <td class="text-center">
+                                                <a href="{{ url('programs/' . $program->id) }}"
+                                                    class="btn btn-success btn-sm text-light"><i class="far fa-eye"></i></a>
                                                 <a href="{{ url('programs/edit/' . $program->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                                                 <form action="{{ url('programs/' . $program->id) }}" method="POST"

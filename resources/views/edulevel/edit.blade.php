@@ -16,7 +16,9 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
+                        <li><a href="#">Jenjang</a></li>
+                        <li><a href="#">Data</a></li>
+                        <li class="active">Edit</li>
                     </ol>
                 </div>
             </div>

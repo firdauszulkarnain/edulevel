@@ -48,7 +48,7 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
-        //
+        return view('program.show', compact('program'));
     }
 
     /**
