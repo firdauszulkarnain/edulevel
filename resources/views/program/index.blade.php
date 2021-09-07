@@ -8,7 +8,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Program</h1>
+                    <h1>Program Edu Level</h1>
                 </div>
             </div>
         </div>
@@ -16,7 +16,6 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active"><i class="fa fa-dashboard"></i></li>
                     </ol>
                 </div>
             </div>
@@ -37,15 +36,15 @@
                                 <h3>Program</h3>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ url('programs/add') }}" class="btn btn-info">Tambah Program</a>
+                                <a href="{{ url('programs/create') }}" class="btn btn-info">Tambah Program</a>
                             </div>
                         </div>
                         <div class="card-body table-responsive">
                             {{-- @if (session('status'))
                                 <div class="alert alert-success">
                                     {{ session('status') }}
-                                </div>
-                            @endif --}}
+                    </div>
+                    @endif --}}
                             <table class="table table-bordered table-light">
                                 <thead>
                                     <tr>
@@ -63,7 +62,8 @@
                                             <td>{{ $program->edulevel->name }}</td>
                                             <td class="text-center">
                                                 <a href="{{ url('programs/' . $program->id) }}"
-                                                    class="btn btn-success btn-sm text-light"><i class="far fa-eye"></i></a>
+                                                    class="btn btn-success btn-sm text-light"><i
+                                                        class="far fa-eye"></i></a>
                                                 <a href="{{ url('programs/edit/' . $program->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                                                 <form action="{{ url('programs/' . $program->id) }}" method="POST"

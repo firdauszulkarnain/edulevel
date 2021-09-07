@@ -22,11 +22,11 @@ class EduLevelController extends Controller
     public function addProcess(Request $request)
     {
         $request->validate([
-            'nama' => 'required|min:2',
+            'name' => 'required|min:2',
             'desc' => 'required',
         ], [
-            'nama.required' => 'Nama Jenjang Tidak Boleh Kosong!',
-            'nama.min' => 'Minimal Dua Karakter Inputan!',
+            'name.required' => 'Nama Jenjang Tidak Boleh Kosong!',
+            'name.min' => 'Minimal Dua Karakter Inputan!',
             'desc.required' => 'Deskripsi Tidak Boleh Kosong!'
         ]);
         DB::table('edulevels')->insert(

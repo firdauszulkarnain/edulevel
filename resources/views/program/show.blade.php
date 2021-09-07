@@ -17,7 +17,6 @@
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
                         <li><a href="#">Program</a></li>
-                        <li><a href="#">Data</a></li>
                         <li class="active">Detail</li>
                     </ol>
                 </div>
