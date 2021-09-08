@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Edu Level')
+@section('title', 'Program')
 
 
 @section('breadcumbs')
@@ -40,11 +40,11 @@
                             </div>
                         </div>
                         <div class="card-body table-responsive">
-                            {{-- @if (session('status'))
+                            @if (session('status'))
                                 <div class="alert alert-success">
                                     {{ session('status') }}
-                    </div>
-                    @endif --}}
+                                </div>
+                            @endif
                             <table class="table table-bordered table-light">
                                 <thead>
                                     <tr>
@@ -64,7 +64,7 @@
                                                 <a href="{{ url('programs/' . $program->id) }}"
                                                     class="btn btn-success btn-sm text-light"><i
                                                         class="far fa-eye"></i></a>
-                                                <a href="{{ url('programs/edit/' . $program->id) }}"
+                                                <a href="{{ url('programs/' . $program->id) . '/edit' }}"
                                                     class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                                                 <form action="{{ url('programs/' . $program->id) }}" method="POST"
                                                     class="d-inline" onsubmit="return confirm('Yakin Hapus Data?')">

@@ -40,18 +40,42 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:2',
+            'name' => 'required',
             'edulevel_id' => 'required',
-            'price' => 'required',
+            'student_price' => 'required',
             'student_max' => 'required'
         ], [
             'name.required' => 'Nama Jenjang Tidak Boleh Kosong!',
-            'name.min' => 'Minimal Dua Karakter Inputan!',
             'edulevel_id.required' => 'Jenjang Tidak Boleh Kosong!',
-            'price.required' => 'Harga Tidak Boleh Kosong!',
+            'student_price.required' => 'Harga Tidak Boleh Kosong!',
             'student_max.required' => 'Jumlah Siswa Tidak Boleh Kosong!'
         ]);
-        return $request;
+        // return $request;
+
+        // Cara 1 : Default Eloquent
+        // $program = new Program;
+
+        // $program->name = $request->name;
+        // $program->edulevel_id = $request->edulevel_id;
+        // $program->student_price = $request->student_price;
+        // $program->student_max = $request->student_max;
+        // $program->info = $request->info;
+
+        // $program->save();
+
+        // Cara 2 : Mass Assignment
+        // Program::create([
+        //     'name' => $request->name,
+        //     'edulevel_id' => $request->edulevel_id,
+        //     'student_price' => $request->student_price,
+        //     'student_max' => $request->student_max,
+        //     'info' => $request->info
+        // ]);
+
+        // Cara 3 -> Syarat : Input field dan nama field tabel database harus sama !
+        Program::create($request->all());
+
+        return redirect('programs')->with('status', 'Data Program Berhasil Ditambahkan');
     }
 
     /**
@@ -62,6 +86,7 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
+        $program->makeHidden(['edulevel_id']);
         return view('program.show', compact('program'));
     }
 
@@ -73,7 +98,8 @@ class ProgramController extends Controller
      */
     public function edit(Program $program)
     {
-        //
+        $edulevels = Edulevel::all();
+        return view('program.edit', compact('program', 'edulevels'));
     }
 
     /**
@@ -85,7 +111,40 @@ class ProgramController extends Controller
      */
     public function update(Request $request, Program $program)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'edulevel_id' => 'required',
+            'student_price' => 'required',
+            'student_max' => 'required'
+        ], [
+            'name.required' => 'Nama Jenjang Tidak Boleh Kosong!',
+            'edulevel_id.required' => 'Jenjang Tidak Boleh Kosong!',
+            'student_price.required' => 'Harga Tidak Boleh Kosong!',
+            'student_max.required' => 'Jumlah Siswa Tidak Boleh Kosong!'
+        ]);
+        // Cara 1 : Default Eloquent
+        // $program->name = $request->name;
+        // $program->edulevel_id = $request->edulevel_id;
+        // $program->student_price = $request->student_price;
+        // $program->student_max = $request->student_max;
+        // $program->info = $request->info;
+
+        // $program->save();
+
+        //  Cara 2 : Mass Assignment
+        Program::where('id', $program->id)
+            ->update([
+                'name' => $request->name,
+                'edulevel_id' => $request->edulevel_id,
+                'student_price' => $request->student_price,
+                'student_max' => $request->student_max,
+                'info' => $request->info
+            ]);
+
+
+        return redirect('programs')->with('status', 'Data Program Berhasil Diupdate');
+
+        // return $request;
     }
 
     /**
@@ -96,6 +155,15 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        // Cara 1
+        // $program->delete();
+
+        // Cara 2
+        // Program::destroy($program->id);
+
+        // Cara 3
+        Program::where('id', $program->id)->delete();
+
+        return redirect('programs')->with('status', 'Data Program Berhasil Dihapus');
     }
 }
