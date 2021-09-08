@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Edu Level')
+@section('title', 'Program')
 
 
 @section('breadcumbs')
@@ -8,7 +8,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Jenjang Edu Level</h1>
+                    <h1>Program Terhapus Edu Level</h1>
                 </div>
             </div>
         </div>
@@ -16,6 +16,8 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
+                        <li><a href="#">Program</a></li>
+                        <li class="active">Trash</li>
                     </ol>
                 </div>
             </div>
@@ -33,11 +35,18 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="pull-left">
-                                <strong>Data Jenjang Sekolah</strong>
+                                <strong>Data Program Terhapus</strong>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ url('edulevels/add') }}" class="btn btn-info btn-sm"><i
-                                        class="fa fa-plus"></i> Tambah Jenjang</a>
+                                <a href="{{ url('programs/delete') }}" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Delete All
+                                </a>
+                                <a href="{{ url('programs/restore') }}" class="btn btn-info btn-sm">
+                                    <i class="fa fa-undo"></i> Restore All
+                                </a>
+                                <a href="{{ url('programs') }}" class="btn btn-secondary btn-sm">
+                                    <i class="fa fa-chevron-left"></i> Back
+                                </a>
                             </div>
                         </div>
                         <div class="card-body table-responsive">
@@ -50,31 +59,28 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Deskripsi</th>
+                                        <th scope="col">Nama Program</th>
+                                        <th scope="col">Edulevel</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($edulevels->count() > 0)
-                                        @foreach ($edulevels as $key => $edulevel)
+                                    @if ($programs->count() > 0)
+                                        @foreach ($programs as $key => $program)
                                             <tr>
-                                                <th scope="row">{{ $edulevels->firstItem() + $key }}</th>
-                                                <td>{{ $edulevel->name }}</td>
-                                                <td>{{ $edulevel->desc }}</td>
+                                                <th scope="row">{{ $programs->firstItem() + $key }}</th>
+                                                <td>{{ $program->name }}</td>
+                                                <td>{{ $program->edulevel->name }}</td>
                                                 <td class="text-center">
-
-                                                    <a href="{{ url('edulevels/edit/' . $edulevel->id) }}"
-                                                        class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
-                                                    <form action="{{ url('edulevels/' . $edulevel->id) }}" method="POST"
-                                                        class="d-inline"
-                                                        onsubmit="return confirm('Yakin Hapus Data?')">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="btn btn-danger btn-sm">
-                                                            <i class="far fa-trash-alt"></i>
-                                                    </form>
-                                                    </button>
+                                                    <a href="{{ url('programs/restore' . $program->id) }}"
+                                                        class="btn btn-info btn-sm text-light">
+                                                        Restore
+                                                    </a>
+                                                    <a href="{{ url('programs/delete' . $program->id) }}"
+                                                        class="btn btn-danger btn-sm text-light"
+                                                        onclick="return confirm('Yakin Hapus Data?')">
+                                                        Delete Permanently
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -83,21 +89,22 @@
                                             <td colspan="4" class="text-center">Data Kosong</td>
                                         </tr>
                                     @endif
+
                                 </tbody>
                             </table>
                             <div class="pull-left">
                                 <small>
                                     Showing
-                                    {{ $edulevels->firstItem() }}
+                                    {{ $programs->firstItem() }}
                                     To
-                                    {{ $edulevels->lastItem() }}
+                                    {{ $programs->lastItem() }}
                                     Of
-                                    {{ $edulevels->total() }}
+                                    {{ $programs->total() }}
                                     Entries
                                 </small>
                             </div>
                             <div class="pull-right">
-                                {{ $edulevels->links() }}
+                                {{ $programs->links() }}
                             </div>
                         </div>
                     </div>

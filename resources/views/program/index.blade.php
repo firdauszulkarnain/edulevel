@@ -33,10 +33,15 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="pull-left">
-                                <h3>Program</h3>
+                                <strong>Data Program Edu Level</strong>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ url('programs/create') }}" class="btn btn-info">Tambah Program</a>
+                                <a href="{{ url('programs/trash') }}" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Trash
+                                </a>
+                                <a href="{{ url('programs/create') }}" class="btn btn-info btn-sm">
+                                    <i class="fa fa-plus"></i> Tambah Program
+                                </a>
                             </div>
                         </div>
                         <div class="card-body table-responsive">
@@ -55,30 +60,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($programs as $program)
+                                    @if ($programs->count() > 0)
+                                        @foreach ($programs as $key => $program)
+                                            <tr>
+                                                <th scope="row">{{ $programs->firstItem() + $key }}</th>
+                                                <td>{{ $program->name }}</td>
+                                                <td>{{ $program->edulevel->name }}</td>
+                                                <td class="text-center">
+                                                    <a href="{{ url('programs/' . $program->id) }}"
+                                                        class="btn btn-success btn-sm text-light"><i
+                                                            class="far fa-eye"></i></a>
+                                                    <a href="{{ url('programs/' . $program->id) . '/edit' }}"
+                                                        class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                                    <form action="{{ url('programs/' . $program->id) }}" method="POST"
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('Yakin Hapus Data?')">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="btn btn-danger btn-sm">
+                                                            <i class="far fa-trash-alt"></i>
+                                                    </form>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
                                         <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $program->name }}</td>
-                                            <td>{{ $program->edulevel->name }}</td>
-                                            <td class="text-center">
-                                                <a href="{{ url('programs/' . $program->id) }}"
-                                                    class="btn btn-success btn-sm text-light"><i
-                                                        class="far fa-eye"></i></a>
-                                                <a href="{{ url('programs/' . $program->id) . '/edit' }}"
-                                                    class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
-                                                <form action="{{ url('programs/' . $program->id) }}" method="POST"
-                                                    class="d-inline" onsubmit="return confirm('Yakin Hapus Data?')">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="btn btn-danger btn-sm">
-                                                        <i class="far fa-trash-alt"></i>
-                                                </form>
-                                                </button>
-                                            </td>
+                                            <td colspan="4" class="text-center">Data Kosong</td>
                                         </tr>
-                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
+                            <div class="pull-left">
+                                <small>
+                                    Showing
+                                    {{ $programs->firstItem() }}
+                                    To
+                                    {{ $programs->lastItem() }}
+                                    Of
+                                    {{ $programs->total() }}
+                                    Entries
+                                </small>
+                            </div>
+                            <div class="pull-right">
+                                {{ $programs->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Program extends Model
 {
+    use SoftDeletes;
+
     // Fillable = Yang Boleh Diisi
     // protected $fillable = [];
     // Guarded = Yang Tidak Boleh Diisi

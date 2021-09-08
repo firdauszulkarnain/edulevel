@@ -15,7 +15,8 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::all();
+        // $programs = Program::all();
+        $programs = Program::paginate(5);
         // return $program;
         return view('program.index', compact('programs'));
     }
@@ -165,5 +166,37 @@ class ProgramController extends Controller
         Program::where('id', $program->id)->delete();
 
         return redirect('programs')->with('status', 'Data Program Berhasil Dihapus');
+    }
+
+    public function trash()
+    {
+        $programs = Program::onlyTrashed()->paginate(5);
+        return view('program.trash', compact('programs'));
+    }
+
+    public function restore($id = null)
+    {
+        if ($id != null) {
+            $programs = Program::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+        } else {
+            $programs = Program::onlyTrashed()
+                ->restore();
+        }
+        return redirect('programs/trash')->with('status', 'Data Program Berhasil Direstore');
+    }
+
+    public function delete($id = null)
+    {
+        if ($id != null) {
+            $programs = Program::onlyTrashed()
+                ->where('id', $id)
+                ->forceDelete();
+        } else {
+            $programs = Program::onlyTrashed()
+                ->forceDelete();
+        }
+        return redirect('programs/trash')->with('status', 'Data Program Berhasil Dihapus Permanen');
     }
 }

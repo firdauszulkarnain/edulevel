@@ -9,7 +9,7 @@ class EduLevelController extends Controller
 {
     public function index()
     {
-        $edulevels = DB::table('edulevels')->get();
+        $edulevels = DB::table('edulevels')->paginate(5);
         // return $edulevels;
         return view('edulevel.data')->with('edulevels', $edulevels);
     }
@@ -31,7 +31,7 @@ class EduLevelController extends Controller
         ]);
         DB::table('edulevels')->insert(
             [
-                'name' => $request->nama,
+                'name' => $request->name,
                 'desc' => $request->desc
             ]
         );

@@ -8,7 +8,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Program</h1>
+                    <h1>Detail Program Edu Level</h1>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="pull-left">
-                                <h3>Detail Program</h3>
+                                <strong>Detail Program</strong>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ url('programs') }}" class="btn btn-secondary btn-sm"><i

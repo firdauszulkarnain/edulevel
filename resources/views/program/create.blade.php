@@ -8,7 +8,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Program Edu Level</h1>
+                    <h1>Tambah Program Edu Level</h1>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
                         <li><a href="#">Program</a></li>
-                        <li class="active">Edit</li>
+                        <li class="active">Tambah</li>
                     </ol>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="pull-left">
-                                <b>Edit Data Program</b>
+                                <strong>Tambah Data Program</strong>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ url('programs') }}" class="btn btn-sm btn-secondary"><i
